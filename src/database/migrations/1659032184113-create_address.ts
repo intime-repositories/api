@@ -43,6 +43,7 @@ export class createAddress1659032184113 implements MigrationInterface {
       })
     );
   }
+  
 
   public async down(queryRunner: QueryRunner): Promise<void> {}
 }
