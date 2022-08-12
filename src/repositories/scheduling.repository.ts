@@ -29,17 +29,22 @@ export class SchedulingRepository {
       .execute();
   }
 
-  async delete(id: string){
-    await this.repo.delete({id});
+  async delete(id: string) {
+    await this.repo.delete({ id });
   }
 
-  async getOne(scheduling: Scheduling){
-    const item = await this.repo.findOneBy(scheduling);
+  async getOne(id: string) {
+    const item = await this.repo.findOne({
+      where: { id },
+      relations: ["provider", "client"],
+    });
 
     return item;
   }
 
-  async getAll(){
-    const schedulings = await this.repo.find();
+  async getAll() {
+    const schedulings = await this.repo.find({
+      relations: ["provider", "client"],
+    });
   }
 }

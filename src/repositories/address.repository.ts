@@ -43,8 +43,8 @@ export class AddressRepository {
     return item;
   }
 
-  async getOne(client: Client) {
-    const item = await this.repo.findOneBy(client);
+  async getOne(id: string) {
+    const item = await this.repo.findOneBy({id});
 
     return item;
   }

@@ -1,3 +1,5 @@
+import { it } from "node:test";
+import { stringify } from "querystring";
 import { Repository } from "typeorm";
 import AppDataSource from "../database/dataSource";
 import { Client } from "../database/entities/Client";
@@ -9,10 +11,9 @@ export class ClientRepository {
   }
 
   async create(client: Client) {
-    const newClient = this.repo.create(client);
-    await this.repo.save(newClient);
-
-    return newClient;
+      const newClient = this.repo.create(client);
+      await this.repo.save(newClient);
+      return newClient;
   }
 
   async delete(id: string) {
@@ -33,15 +34,22 @@ export class ClientRepository {
       .execute();
   }
 
-  async getOne(id: string){
-    const client = await this.repo.findOneBy({id})
+  async getOne(id: string) {
+    const client = await this.repo.find({
+      where: { id },
+      relations: ["address"],
+    });
 
     return client;
   }
 
-  async getAll(){
-    const clients = await this.repo.find();
+  async getAll() {
+    const clients = await this.repo.find({ relations: ["address"] });
 
     return clients;
+  }
+
+  async register(client: Client){
+    const [email, password] = client.email; client.password
   }
 }

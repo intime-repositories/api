@@ -35,14 +35,17 @@ export class ProductRepository {
     await this.repo.delete(id);
   }
 
-  async getOne(id: string){
-    const product = await this.repo.findOneBy({id});
+  async getOne(id: string) {
+    const product = await this.repo.findOne({
+      where: { id },
+      relations: ["provider"],
+    });
 
     return product;
   }
 
-  async getAll(){
-    const products = await this.repo.find();
+  async getAll() {
+    const products = await this.repo.find({ relations: ["provider"] });
 
     return products;
   }
