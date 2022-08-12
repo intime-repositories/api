@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm"
 
-export class createProvider1659033149541 implements MigrationInterface {
+export class createAddress1660233995740 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-              name: "provider",
+              name: "address",
               columns: [
                 {
                   name: "id",
@@ -13,36 +13,32 @@ export class createProvider1659033149541 implements MigrationInterface {
                   isPrimary: true,
                 },
                 {
-                  name: "email",
+                  name: "street",
                   type: "varchar",
                 },
                 {
-                  name: "password",
+                  name: "number",
                   type: "varchar",
                 },
                 {
-                  name: "fullname",
+                  name: "district",
                   type: "varchar",
                 },
                 {
-                  name: "address_id",
-                  type: "uuid",
+                  name: "city",
+                  type: "varchar",
                 },
                 {
-                    name: "phone",
-                    type: "varchar"
+                  name: "state",
+                  type: "varchar",
                 },
                 {
-                    name: "birthDate",
-                    type: "timestamptz"
-                }
-              ],
-              foreignKeys: [
+                  name: "complement",
+                  type: "varchar",
+                },
                 {
-                  name: "fk_address",
-                  columnNames: ["address_id"],
-                  referencedTableName: "address",
-                  referencedColumnNames: ["id"],
+                  name: "zip_code",
+                  type: "varchar",
                 },
               ],
             })

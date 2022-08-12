@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm"
 
-export class createScheduling1659060640309 implements MigrationInterface {
+export class createProduct1660234121519 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-              name: "scheduling",
+              name: "product",
               columns: [
                 {
                   name: "id",
@@ -13,36 +13,34 @@ export class createScheduling1659060640309 implements MigrationInterface {
                   isPrimary: true,
                 },
                 {
-                  name: "payment",
+                  name: "name",
                   type: "varchar",
                 },
                 {
-                  name: "client_id",
+                  name: "description",
+                  type: "varchar",
+                },
+                {
+                  name: "provider_id",
                   type: "uuid",
                 },
                 {
-                  name: "product_id",
-                  type: "uuid",
+                  name: "price",
+                  type: "numeric",
                 },
                 {
                   name: "duration",
                   type: "numeric",
-                }
+                },
               ],
               foreignKeys: [
                 {
-                    name: "fk_client",
-                    columnNames: ["client_id"],
-                    referencedTableName: "client",
-                    referencedColumnNames: ["id"]
+                  name: "fk_provider",
+                  columnNames: ["provider_id"],
+                  referencedTableName: "provider",
+                  referencedColumnNames: ["id"],
                 },
-                {
-                    name: "fk_product",
-                    columnNames: ["product_id"],
-                    referencedTableName: "product",
-                    referencedColumnNames: ["id"]
-                }
-              ]
+              ],
             })
           );
     }
