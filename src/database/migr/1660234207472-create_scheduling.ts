@@ -17,11 +17,11 @@ export class createScheduling1660234207472 implements MigrationInterface {
                   type: "varchar",
                 },
                 {
-                  name: "client_id",
+                  name: "clientId",
                   type: "uuid",
                 },
                 {
-                  name: "product_id",
+                  name: "productId",
                   type: "uuid",
                 },
                 {
@@ -31,14 +31,14 @@ export class createScheduling1660234207472 implements MigrationInterface {
               ],
               foreignKeys: [
                 {
-                  name: "fk_client",
-                  columnNames: ["client_id"],
+                  name: "fkClient",
+                  columnNames: ["clientId"],
                   referencedTableName: "client",
                   referencedColumnNames: ["id"],
                 },
                 {
-                  name: "fk_product",
-                  columnNames: ["product_id"],
+                  name: "fkProduct",
+                  columnNames: ["productId"],
                   referencedTableName: "product",
                   referencedColumnNames: ["id"],
                 },

@@ -21,7 +21,7 @@ export class createProduct1660234121519 implements MigrationInterface {
                   type: "varchar",
                 },
                 {
-                  name: "provider_id",
+                  name: "providerId",
                   type: "uuid",
                 },
                 {
@@ -32,11 +32,15 @@ export class createProduct1660234121519 implements MigrationInterface {
                   name: "duration",
                   type: "numeric",
                 },
+                {
+                  name: "cover",
+                  type: "varchar",
+                }
               ],
               foreignKeys: [
                 {
-                  name: "fk_provider",
-                  columnNames: ["provider_id"],
+                  name: "fkProvider",
+                  columnNames: ["providerId"],
                   referencedTableName: "provider",
                   referencedColumnNames: ["id"],
                 },
