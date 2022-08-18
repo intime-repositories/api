@@ -24,10 +24,10 @@ export class Client {
   fullname: string;
 
   @Column({ nullable: true })
-  address_id: string;
+  addressId: string;
 
   @ManyToOne(() => Address)
-  @JoinColumn({ name: "address_id" })
+  @JoinColumn({ name: "addressId" })
   address: Address;
 
   @Column({ nullable: true })

@@ -21,7 +21,7 @@ export class Product {
   description: string;
 
   @ManyToOne(() => Provider)
-  @JoinColumn({ name: "provider_id" })
+  @JoinColumn({ name: "providerId" })
   provider: Provider;
 
   @Column()
@@ -29,4 +29,7 @@ export class Product {
 
   @Column()
   duration: number;
+
+  @Column()
+  cover: string;
 }

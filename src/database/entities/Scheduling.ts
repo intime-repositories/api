@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Client } from "./Client";
-import { Provider } from "./Provider";
+import { Product } from "./Product";
 
 
 @Entity("scheduling")
@@ -14,15 +14,11 @@ export class Scheduling {
   payment: string;
 
   @ManyToOne(() => Client)
-  @JoinColumn({name: "client_id"})
+  @JoinColumn({name: "clientId"})
   client: Client;
 
-  @ManyToOne(() => Provider)
-  @JoinColumn({name: "provider_id"})
-  provider: Provider;
-
-  @Column()
-  duration: number;
-
+  @ManyToOne(() => Product)
+  @JoinColumn({name: "productId"})
+  product: Product;
 
 }

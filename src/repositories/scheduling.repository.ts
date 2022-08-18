@@ -23,7 +23,7 @@ export class SchedulingRepository {
       .set({
         payment: scheduling.payment,
         client: scheduling.client,
-        provider: scheduling.provider,
+        product: scheduling.product,
       })
       .where({ id })
       .execute();
@@ -36,7 +36,7 @@ export class SchedulingRepository {
   async getOne(id: string) {
     const item = await this.repo.findOne({
       where: { id },
-      relations: ["provider", "client"],
+      relations: ["product", "client"],
     });
 
     return item;
@@ -44,7 +44,9 @@ export class SchedulingRepository {
 
   async getAll() {
     const schedulings = await this.repo.find({
-      relations: ["provider", "client"],
+      relations: ["product", "client"],
     });
+
+    return schedulings
   }
 }

@@ -28,14 +28,14 @@ export class ClientRepository {
         email: client.email,
         password: client.password,
         fullname: client.fullname,
-        address_id: client.address_id,
+        addressId: client.addressId,
       })
       .where({ id })
       .execute();
   }
 
   async getOne(id: string) {
-    const client = await this.repo.find({
+    const client = await this.repo.findOne({
       where: { id },
       relations: ["address"],
     });
