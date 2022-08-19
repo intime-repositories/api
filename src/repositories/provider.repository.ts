@@ -36,7 +36,7 @@ export class ProviderRepository {
   }
 
   async getOne(id: string) {
-    const result = await this.repo.find({
+    const result = await this.repo.findOne({
       where: { id },
       relations: ["address"],
     });

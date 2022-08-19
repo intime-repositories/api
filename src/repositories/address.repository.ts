@@ -44,7 +44,7 @@ export class AddressRepository {
   }
 
   async getOne(id: string) {
-    const item = await this.repo.findOneBy({id});
+    const item = await this.repo.findOne({where: {id}});
 
     return item;
   }
