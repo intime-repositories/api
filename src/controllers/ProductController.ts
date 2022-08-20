@@ -1,4 +1,4 @@
-import { Request, response, Response } from "express";
+import { Request, Response } from "express";
 import { ProductService } from "../services/ProductServices";
 
 export class ProductController {
@@ -15,18 +15,18 @@ export class ProductController {
     }
   }
 
-  async update(request: Request, reponse: Response) {
+  async update(request: Request, response: Response) {
     try {
       const { id } = request.params;
       const product = request.body;
 
       const service = new ProductService();
 
-      await service.update(id, product);
+      const result = await service.update(id, product);
 
-      return response.status(200).end();
+      return response.json(result);
     } catch (error) {
-      return reponse.status(400).json(error.message);
+      return response.status(400).json(error.message);
     }
   }
 

@@ -13,6 +13,12 @@ export class Scheduling {
   @Column()
   payment: string;
 
+  @Column()
+  startDate: Date;
+
+  @Column()
+  endDate: Date;
+
   @ManyToOne(() => Client)
   @JoinColumn({name: "clientId"})
   client: Client;

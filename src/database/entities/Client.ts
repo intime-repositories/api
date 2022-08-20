@@ -34,5 +34,5 @@ export class Client {
   phone: string;
 
   @Column({ nullable: true })
-  birth_date: string;
+  birthDate: string;
 }
