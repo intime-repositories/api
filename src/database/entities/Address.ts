@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from "typeorm";
+import { Provider } from "./Provider";
 
 @Entity("address")
 export class Address {
@@ -26,5 +27,12 @@ export class Address {
   complement: string;
 
   @Column()
-  zip_code: string;
+  zipCode: string;
+
+  @Column({ nullable: true })
+  providerId: string;
+
+  @ManyToOne(() => Address)
+  @JoinColumn({ name: "providerId" })
+  provider: Provider;
 }

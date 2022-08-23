@@ -28,11 +28,6 @@ export class createProvider1660234096260 implements MigrationInterface {
                   isNullable: true,
                 },
                 {
-                  name: "addressId",
-                  type: "uuid",
-                  isNullable: true,
-                },
-                {
                   name: "phone",
                   type: "varchar",
                   isNullable: true,
@@ -42,14 +37,10 @@ export class createProvider1660234096260 implements MigrationInterface {
                   type: "date",
                   isNullable: true,
                 },
-              ],
-              foreignKeys: [
                 {
-                  name: "fkAddress",
-                  columnNames: ["addressId"],
-                  referencedTableName: "address",
-                  referencedColumnNames: ["id"],
-                },
+                  name: "photo",
+                  type: "varchar",
+                }
               ],
             })
           );

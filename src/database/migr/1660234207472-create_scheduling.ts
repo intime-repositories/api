@@ -21,6 +21,10 @@ export class createScheduling1660234207472 implements MigrationInterface {
                   type: "uuid",
                 },
                 {
+                  name: "productId",
+                  type: "uuid",
+                },
+                {
                   name: "startDate",
                   type: "timestamp"
                 },

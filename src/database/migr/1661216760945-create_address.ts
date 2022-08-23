@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm"
 
-export class createAddress1660233995740 implements MigrationInterface {
+export class createAddress1661216760945 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
@@ -39,6 +39,30 @@ export class createAddress1660233995740 implements MigrationInterface {
                 {
                   name: "zipCode",
                   type: "varchar",
+                },
+                {
+                  name: "providerId",
+                  type: "uuid",
+                  isNullable: true
+                },
+                {
+                  name: "clientId",
+                  type: "uuid",
+                  isNullable: true
+                },
+              ],
+              foreignKeys: [
+                {
+                  name: "fkProvider",
+                  columnNames: ["providerId"],
+                  referencedTableName: "provider",
+                  referencedColumnNames: ["id"],
+                },
+                {
+                  name: "fkClient",
+                  columnNames: ["clientId"],
+                  referencedTableName: "client",
+                  referencedColumnNames: ["id"],
                 },
               ],
             })

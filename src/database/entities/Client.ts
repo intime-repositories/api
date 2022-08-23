@@ -35,4 +35,7 @@ export class Client {
 
   @Column({ nullable: true })
   birthDate: string;
+
+  @Column()
+  photo: string;
 }

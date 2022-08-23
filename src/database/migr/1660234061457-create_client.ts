@@ -28,11 +28,6 @@ export class createClient1660234061457 implements MigrationInterface {
                   isNullable: true,
                 },
                 {
-                  name: "addressId",
-                  type: "uuid",
-                  isNullable: true,
-                },
-                {
                   name: "phone",
                   type: "varchar",
                   isNullable: true,
@@ -41,15 +36,11 @@ export class createClient1660234061457 implements MigrationInterface {
                   name: "birthDate",
                   type: "date",
                   isNullable: true
-                }
-              ],
-              foreignKeys: [
-                {
-                  name: "fkAddress",
-                  columnNames: ["addressId"],
-                  referencedTableName: "address",
-                  referencedColumnNames: ["id"],
                 },
+                {
+                  name: "photo",
+                  type: "varchar",
+                }
               ],
             })
           );

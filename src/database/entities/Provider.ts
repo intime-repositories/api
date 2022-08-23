@@ -24,15 +24,11 @@ export class Provider {
   fullname: string;
 
   @Column({ nullable: true })
-  addressId: string;
-
-  @ManyToOne(() => Address)
-  @JoinColumn({ name: "addressId" })
-  address: Address;
-
-  @Column({ nullable: true })
   phone: string;
 
   @Column({ nullable: true })
   birthDate: Date;
+
+  @Column()
+  photo: string;
 }

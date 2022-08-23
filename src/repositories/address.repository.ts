@@ -27,7 +27,7 @@ export class AddressRepository {
           city: address.city,
           state: address.state,
           complement: address.complement,
-          zip_code: address.zip_code,
+          zipCode: address.zipCode,
         })
         .where({ id })
         .execute();
