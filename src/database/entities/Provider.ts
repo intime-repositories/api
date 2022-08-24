@@ -29,10 +29,10 @@ export class Provider {
   @Column({ nullable: true })
   birthDate: Date;
 
-  @Column()
+  @Column({ nullable: true })
   cpf: string;
 
-  @Column()
+  @Column({ nullable: true })
   photo: string;
 
   @Column({ nullable: true })
