@@ -15,7 +15,7 @@ export class SchedulingController {
     }
   }
 
-  async update(request: Request, reponse: Response) {
+  async update(request: Request, response: Response) {
     try {
       const { id } = request.params;
       const scheduling = request.body;
@@ -26,7 +26,7 @@ export class SchedulingController {
 
       return response.status(200).end();
     } catch (error) {
-      return reponse.status(400).json(error.message);
+      return response.status(400).json(error.message);
     }
   }
 
