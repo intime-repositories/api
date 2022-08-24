@@ -14,7 +14,7 @@ export class Provider {
   })
   id: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, unique: true })
   email: string;
 
   @Column({ nullable: true })
@@ -29,7 +29,7 @@ export class Provider {
   @Column({ nullable: true })
   birthDate: Date;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, unique: true })
   cpf: string;
 
   @Column({ nullable: true })
