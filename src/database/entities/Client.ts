@@ -30,7 +30,7 @@ export class Client {
   cpf: string;
 
   @Column({ nullable: true })
-  birthDate: string;
+  birthDate: Date;
 
   @Column({ nullable: true })
   photo: string;
