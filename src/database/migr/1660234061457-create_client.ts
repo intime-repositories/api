@@ -28,12 +28,12 @@ export class createClient1660234061457 implements MigrationInterface {
                   isNullable: true,
                 },
                 {
-                  name: "phone",
+                  name: "cpf",
                   type: "varchar",
                   isNullable: true,
                 },
                 {
-                  name: "cpf",
+                  name: "phone",
                   type: "varchar",
                   isNullable: true,
                 },
