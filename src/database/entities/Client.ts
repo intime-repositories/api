@@ -24,18 +24,21 @@ export class Client {
   fullname: string;
 
   @Column({ nullable: true })
+  phone: string;
+
+  @Column({ nullable: true })
+  cpf: string;
+
+  @Column({ nullable: true })
+  birthDate: string;
+
+  @Column({ nullable: true })
+  photo: string;
+
+  @Column({ nullable: true })
   addressId: string;
 
   @ManyToOne(() => Address)
   @JoinColumn({ name: "addressId" })
   address: Address;
-
-  @Column({ nullable: true })
-  phone: string;
-
-  @Column({ nullable: true })
-  birthDate: string;
-
-  @Column()
-  photo: string;
 }

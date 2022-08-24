@@ -28,11 +28,4 @@ export class Address {
 
   @Column()
   zipCode: string;
-
-  @Column({ nullable: true })
-  providerId: string;
-
-  @ManyToOne(() => Address)
-  @JoinColumn({ name: "providerId" })
-  provider: Provider;
 }

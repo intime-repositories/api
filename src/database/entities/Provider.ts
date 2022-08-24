@@ -30,5 +30,15 @@ export class Provider {
   birthDate: Date;
 
   @Column()
+  cpf: string;
+
+  @Column()
   photo: string;
+
+  @Column({ nullable: true })
+  addressId: string;
+
+  @ManyToOne(() => Address)
+  @JoinColumn({ name: "addressId" })
+  address: Address;
 }
