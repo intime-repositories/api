@@ -31,11 +31,7 @@ export class createScheduling1660234207472 implements MigrationInterface {
                 {
                   name: "endDate",
                   type: "timestamp"
-                },
-                {
-                  name: "duration",
-                  type: "numeric",
-                },
+                }
               ],
               foreignKeys: [
                 {
