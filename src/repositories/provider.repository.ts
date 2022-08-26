@@ -25,7 +25,10 @@ export class ProviderRepository {
         password: provider.password,
         fullname: provider.fullname,
         phone: provider.phone,
+        cpf: provider.cpf,
         birthDate: provider.birthDate,
+        photo: provider.photo,
+        addressId: provider.addressId
       })
       .where({ id })
       .execute();

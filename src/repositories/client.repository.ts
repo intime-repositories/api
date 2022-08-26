@@ -28,6 +28,10 @@ export class ClientRepository {
         email: client.email,
         password: client.password,
         fullname: client.fullname,
+        phone: client.phone,
+        cpf: client.cpf,
+        birthDate: client.birthDate,
+        photo: client.photo,
         addressId: client.addressId,
       })
       .where({ id })
@@ -49,7 +53,4 @@ export class ClientRepository {
     return clients;
   }
 
-  async register(client: Client){
-    const [email, password] = client.email; client.password
-  }
 }
