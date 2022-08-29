@@ -16,6 +16,10 @@ export class ClientRepository {
       return newClient;
   }
 
+  async save(client: Client){
+    await this.repo.save(client);
+  }
+
   async delete(id: string) {
     await this.repo.delete(id);
   }
@@ -33,18 +37,21 @@ export class ClientRepository {
         birthDate: client.birthDate,
         photo: client.photo,
         addressId: client.addressId,
+        photoName: client.photoName,
+        photoKey: client.photoKey,
+        photoUrl: client.photoUrl
       })
       .where({ id })
       .execute();
   }
 
   async getOne(id: string) {
-    const client = await this.repo.findOne({
-      where: { id },
+    const result = await this.repo.findOne({
+      where: {id},
       relations: ["address"],
     });
 
-    return client;
+    return result;
   }
 
   async getAll() {

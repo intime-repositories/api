@@ -16,6 +16,10 @@ export class ProductRepository {
     return newProduct;
   }
 
+  async save(product: Product){
+    await this.repo.save(product);
+  }
+
   async update(id: string, product: Product) {
     this.repo
       .createQueryBuilder()
@@ -26,6 +30,9 @@ export class ProductRepository {
         provider: product.provider,
         price: product.price,
         duration: product.duration,
+        photoName: product.photoName,
+        photoKey: product.photoKey,
+        photoUrl: product.photoUrl
       })
       .where({ id })
       .execute();

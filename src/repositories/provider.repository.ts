@@ -28,17 +28,25 @@ export class ProviderRepository {
         cpf: provider.cpf,
         birthDate: provider.birthDate,
         photo: provider.photo,
-        addressId: provider.addressId
+        addressId: provider.addressId,
+        photoName: provider.photoName,
+        photoKey: provider.photoKey,
+        photoUrl: provider.photoUrl
       })
       .where({ id })
       .execute();
+  }
+
+  async save(provider: Provider){
+    await this.repo.save(provider);
   }
 
   async delete(id: string) {
     await this.repo.delete({ id });
   }
 
-  async getOne(id: string) {
+  async getOne(provider: Provider) {
+    const id = provider.id;
     const result = await this.repo.findOne({
       where: { id },
       relations: ["address"],
