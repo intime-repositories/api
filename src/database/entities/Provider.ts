@@ -39,6 +39,14 @@ export class Provider {
   addressId: string;
 
   @ManyToOne(() => Address)
-  @JoinColumn({ name: "addressId" })
   address: Address;
+
+  @Column({ nullable: true})
+  photoName: string;
+
+  @Column({ nullable: true})
+  photoKey: string;
+
+  @Column({ nullable: true})
+  photoUrl: string;
 }
