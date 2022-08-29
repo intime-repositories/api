@@ -16,15 +16,15 @@ export class ClientController {
 
   async update(request: Request, response: Response) {
     try {
-      const { id } = request.params;
+      const {id} = request.params;
       const client = request.body;
       const service = new ClientService();
-
+      
       const result = await service.update(id, client);
 
       return response.json(result);
     } catch (error) {
-      return response.json(400).json(error.message);
+      return response.status(400).json(error.message);
     }
   }
 
@@ -43,9 +43,9 @@ export class ClientController {
 
   async getOne(request: Request, response: Response) {
     try {
-      const { id } = request.params;
+      const client = request.body;
       const service = new ClientService();
-      const result = await service.getOne(id);
+      const result = await service.getOne(client);
 
       return response.json(result);
     } catch (error) {
