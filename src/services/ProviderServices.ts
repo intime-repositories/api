@@ -15,33 +15,33 @@ export class ProviderService {
     return newProvider;
   }
 
-  async update(id: string, provider: Provider) {
+  async update(provider: Provider) {
     const repo = new ProviderRepository();
-    const item = await repo.getOne(id);
+    const item = await repo.getOne(provider);
 
     if (!item) {
       throw new Error("Provider does not exists!");
     }
 
-    await repo.update(id, provider);
+    await repo.update(provider);
 
-    return { id, provider };
+    return { provider };
   }
 
-  async delete(id: string) {
+  async delete(provider: Provider) {
     const repo = new ProviderRepository();
-    const item = await repo.getOne(id);
+    const item = await repo.getOne(provider);
 
     if (!item) {
       throw new Error("Provider does not exists!");
     }
 
-    await repo.delete(id);
+    await repo.delete(item);
   }
 
-  async getOne(id: string) {
+  async getOne(provider: Provider) {
     const repo = new ProviderRepository();
-    const item = await repo.getOne(id);
+    const item = await repo.getOne(provider);
 
     if (!item) {
       throw new Error("Provider does not exists!");
@@ -53,6 +53,13 @@ export class ProviderService {
   async getAll() {
     const repo = new ProviderRepository();
     const item = await repo.getAll();
+
+    return item;
+  }
+  
+  async getOneByEmail(email: string){
+    const repo = new ProviderRepository();
+    const item = await repo.getOneByEmail(email);
 
     return item;
   }

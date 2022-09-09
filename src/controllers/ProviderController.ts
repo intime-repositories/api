@@ -17,12 +17,11 @@ export class ProviderController {
 
   async update(request: Request, response: Response) {
     try {
-      const { id } = request.params;
       const provider = request.body;
 
       const service = new ProviderService();
 
-      await service.update(id, provider);
+      await service.update(provider);
 
       return response.status(200).end();
     } catch (error) {
@@ -32,10 +31,10 @@ export class ProviderController {
 
   async delete(request: Request, response: Response) {
     try {
-      const { id } = request.params;
+      const provider = request.body;
       const service = new ProviderService();
 
-      await service.delete(id);
+      await service.delete(provider);
 
       return response.status(200).end();
     } catch (error) {
@@ -45,10 +44,10 @@ export class ProviderController {
 
   async getOne(request: Request, response: Response) {
     try {
-      const { id } = request.params;
+      const provider = request.body;
       const service = new ProviderService();
 
-      const result = await service.getOne(id);
+      const result = await service.getOne(provider);
 
       return response.json(result);
     } catch (error) {

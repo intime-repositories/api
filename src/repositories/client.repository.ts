@@ -11,17 +11,17 @@ export class ClientRepository {
   }
 
   async create(client: Client) {
-      const newClient = this.repo.create(client);
-      await this.repo.save(newClient);
-      return newClient;
+    const newClient = this.repo.create(client);
+    await this.repo.save(newClient);
+    return newClient;
   }
 
-  async save(client: Client){
+  async save(client: Client) {
     await this.repo.save(client);
   }
 
-  async delete(id: string) {
-    await this.repo.delete(id);
+  async delete(client: Client) {
+    await this.repo.delete(client);
   }
 
   async update(id: string, client: Client) {
@@ -39,15 +39,15 @@ export class ClientRepository {
         addressId: client.addressId,
         photoName: client.photoName,
         photoKey: client.photoKey,
-        photoUrl: client.photoUrl
+        photoUrl: client.photoUrl,
       })
       .where({ id })
       .execute();
   }
 
-  async getOne(id: string) {
+  async getOneById(id: string) {
     const result = await this.repo.findOne({
-      where: {id},
+      where: { id },
       relations: ["address"],
     });
 
@@ -60,4 +60,12 @@ export class ClientRepository {
     return clients;
   }
 
+  async getOneByEmail(email: string) {
+    const result = await this.repo.findOne({
+      where: { email },
+      relations: ["address"],
+    });
+
+    return result;
+  }
 }

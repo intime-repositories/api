@@ -16,7 +16,7 @@ export class ProviderRepository {
     return newProvider;
   }
 
-  async update(id: string, provider: Provider) {
+  async update(provider: Provider) {
     this.repo
       .createQueryBuilder()
       .update(Provider)
@@ -33,7 +33,7 @@ export class ProviderRepository {
         photoKey: provider.photoKey,
         photoUrl: provider.photoUrl
       })
-      .where({ id })
+      .where(provider)
       .execute();
   }
 
@@ -41,15 +41,14 @@ export class ProviderRepository {
     await this.repo.save(provider);
   }
 
-  async delete(id: string) {
-    await this.repo.delete({ id });
+  async delete(provider: Provider) {
+    await this.repo.delete(provider);
   }
 
   async getOne(provider: Provider) {
-    const id = provider.id;
     const result = await this.repo.findOne({
-      where: { id },
-      relations: ["address"],
+      where: provider,
+      relations: ["address"]
     });
 
     return result;
@@ -57,6 +56,15 @@ export class ProviderRepository {
 
   async getAll() {
     const result = await this.repo.find({ relations: ["address"] });
+
+    return result;
+  }
+
+  async getOneByEmail(email: string) {
+    const result = await this.repo.findOne({
+      where: { email },
+      relations: ["address"],
+    });
 
     return result;
   }
