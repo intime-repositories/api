@@ -5,7 +5,7 @@ import { LoginController } from "./controllers/LoginController";
 import { ProductController } from "./controllers/ProductController";
 import { ProviderController } from "./controllers/ProviderController";
 import { SchedulingController } from "./controllers/SchedulingController";
-import { Upload } from "./middlewares/upload";
+import { Upload } from "./middlewares/s3";
 import multer from "multer";
 
 const multerConfig = require("./config/multer");
@@ -18,6 +18,7 @@ const provider = new ProviderController();
 const scheduling = new SchedulingController();
 const product = new ProductController();
 
+// Login route
 routes.post("/login", new LoginController().login);
 
 // Address routes
@@ -31,25 +32,14 @@ routes.delete("/address/:id", auth, address.delete);
 routes.post("/client/signup", client.create);
 routes.get("/client", auth, client.getAll);
 routes.get("/client/:client", auth, client.getOne);
-routes.put(
-  "/client/:id", auth,
-  // multer(multerConfig).single("file"),
-  // upload.profilePic,
-  client.update
-);
-routes.delete("/client/:id", auth,  client.delete);
+routes.put("/client/:id", auth, client.update);
+routes.delete("/client/:id", auth, client.delete);
 
 // Provider routes
 routes.post("/provider/signup", provider.create);
 routes.get("/provider", auth, provider.getAll);
 routes.get("/provider/:id", auth, provider.getOne);
-routes.put(
-  "/provider/:id",
-  auth,
-  multer(multerConfig).single("file"),
-  upload.profilePic,
-  provider.update
-);
+routes.put("/provider/:id", auth, provider.update);
 routes.delete("/provider/:id", auth, provider.delete);
 
 // Scheduling routes
@@ -63,13 +53,15 @@ routes.delete("/scheduling/:id", auth, scheduling.delete);
 routes.post("/product", auth, product.create);
 routes.get("/product", auth, product.getAll);
 routes.get("/product/:id", auth, product.getOne);
-routes.put(
-  "/product/:id",
-  auth,
-  multer(multerConfig).single("file"),
-  upload.productPic,
-  product.update
-);
+routes.put("/product/:id", auth, product.update);
 routes.delete("/product/:id", auth, product.delete);
+
+// Image upload
+routes.post(
+  "/upload",
+  // auth,
+  multer(multerConfig).single("file"),
+  upload.pictureLocation
+);
 
 export { routes };
