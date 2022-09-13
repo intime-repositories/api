@@ -47,8 +47,6 @@ export class AddressService {
       throw new Error("Address does not exists!");
     }
 
-    const result = await repo.getOne(id);
-
-    return result;
+    return address;
   }
 }

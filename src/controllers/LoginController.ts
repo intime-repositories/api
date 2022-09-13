@@ -4,28 +4,26 @@ import { ProviderService } from "../services/ProviderServices";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+
 export class LoginController {
   async login(request: Request, response: Response) {
     const requester = request.body;
     const clientService = new ClientService();
     const providerService = new ProviderService();
 
-    async function getUser(user) {
-      const clientUser = await clientService.getOne(user);
-      const providerUser = await providerService.getOne(user);
+    async function getUser(email) {
+      const clientUser = await clientService.getOneByEmail(email);
+      if (clientUser) return clientUser;
 
-      if (clientUser) {
-        return clientUser;
-      } else {
-        return providerUser;
-      }
+      const providerUser = await providerService.getOneByEmail(email);
+      if (providerUser) return providerUser;
+      
     }
-
-    const user = await getUser(requester);
+    const user = await getUser(requester.email);
 
     bcrypt.compare(requester.password, user.password, (err, result) => {
       if (err) {
-        return response.status(401).send({ message: "Falha na autenticação." });
+        return response.status(401).send({ message: "Not Authorized" });
       }
       if (result) {
         const token = jwt.sign(
@@ -44,7 +42,7 @@ export class LoginController {
           .send({ message: "Autenticado com sucesso", token: token });
       }
 
-      response.status(401).send({ message: "Falha na autenticação" });
+      response.status(401).send({ message: "Authetication Error" });
     });
   }
 

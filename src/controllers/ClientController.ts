@@ -16,11 +16,11 @@ export class ClientController {
 
   async update(request: Request, response: Response) {
     try {
-      const {id} = request.params;
+      const { id } = request.params;
       const client = request.body;
       const service = new ClientService();
-      
       const result = await service.update(id, client);
+      console.log(client)
 
       return response.json(result);
     } catch (error) {
@@ -30,10 +30,10 @@ export class ClientController {
 
   async delete(request: Request, response: Response) {
     try {
-      const { id } = request.params;
+      const client = request.body;
       const service = new ClientService();
 
-      await service.delete(id);
+      await service.delete(client);
 
       return response.status(200).end();
     } catch (error) {
@@ -43,9 +43,9 @@ export class ClientController {
 
   async getOne(request: Request, response: Response) {
     try {
-      const client = request.body;
+      const {id} = request.params;
       const service = new ClientService();
-      const result = await service.getOne(client);
+      const result = await service.getOneById(id);
 
       return response.json(result);
     } catch (error) {

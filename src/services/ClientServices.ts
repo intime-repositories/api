@@ -18,29 +18,29 @@ export class ClientService {
 
   async delete(id: string) {
     const repo = new ClientRepository();
-    const item = await repo.getOne(id);
+    const item = await repo.getOneById(id);
 
     if (!item) {
       throw new Error("Client does not exists!");
     }
 
-    await repo.delete(id);
+    await repo.delete(item);
   }
 
   async update(id: string, client: Client) {
     const repo = new ClientRepository();
-    const item = await repo.getOne(id);
+    const item = await repo.getOneById(id);
     if (!item) {
       throw new Error("Client does not exists!");
     }
-    await repo.update(id, client);
+    await repo.update(id, item);
 
-    return { id, client };
+    return { client };
   }
 
-  async getOne(id: string){
+  async getOneById(id: string){
     const repo = new ClientRepository();
-    const item = await repo.getOne(id);
+    const item = await repo.getOneById(id);
 
     if(!item){
         throw new Error("Client does not exists!")
@@ -52,6 +52,13 @@ export class ClientService {
   async getAll(){
     const repo = new ClientRepository();
     const item = await repo.getAll();
+
+    return item;
+  }
+
+  async getOneByEmail(email: string){
+    const repo = new ClientRepository();
+    const item = await repo.getOneByEmail(email);
 
     return item;
   }
