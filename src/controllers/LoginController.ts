@@ -11,7 +11,7 @@ export class LoginController {
     const clientService = new ClientService();
     const providerService = new ProviderService();
 
-    async function getUser(email) {
+    async function getUser(email: string) {
       const clientUser = await clientService.getOneByEmail(email);
       if (clientUser) return clientUser;
 
@@ -42,7 +42,7 @@ export class LoginController {
           .send({ message: "Autenticado com sucesso", token: token });
       }
 
-      response.status(401).send({ message: "Authetication Error" });
+      response.status(401).send({ message: "Incorrect Password" });
     });
   }
 
