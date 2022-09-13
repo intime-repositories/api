@@ -13,11 +13,12 @@ export class LoginController {
 
     async function getUser(email) {
       const clientUser = await clientService.getOneByEmail(email);
-      if (clientUser) return clientUser;
+
+      if (clientUser) return { ...clientUser, role: "client" };
 
       const providerUser = await providerService.getOneByEmail(email);
-      if (providerUser) return providerUser;
-      
+      if (providerUser) return { ...providerUser, role: "provider" };
+
     }
     const user = await getUser(requester.email);
 
@@ -31,12 +32,13 @@ export class LoginController {
             id: user.id,
             email: user.email,
             fullName: user.fullname,
+            role: user.role
           },
           process.env.JWT_SECRET_KEY,
           {
             expiresIn: "3d"
           }
-          );
+        );
         return response
           .status(200)
           .send({ message: "Autenticado com sucesso", token: token });
