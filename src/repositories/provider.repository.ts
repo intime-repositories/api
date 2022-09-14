@@ -29,9 +29,6 @@ export class ProviderRepository {
         birthDate: provider.birthDate,
         photo: provider.photo,
         addressId: provider.addressId,
-        photoName: provider.photoName,
-        photoKey: provider.photoKey,
-        photoUrl: provider.photoUrl
       })
       .where(provider)
       .execute();

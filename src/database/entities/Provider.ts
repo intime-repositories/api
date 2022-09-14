@@ -40,13 +40,4 @@ export class Provider {
 
   @ManyToOne(() => Address)
   address: Address;
-
-  @Column({ nullable: true})
-  photoName: string;
-
-  @Column({ nullable: true})
-  photoKey: string;
-
-  @Column({ nullable: true})
-  photoUrl: string;
 }

@@ -16,7 +16,7 @@ export class ProductRepository {
     return newProduct;
   }
 
-  async save(product: Product){
+  async save(product: Product) {
     await this.repo.save(product);
   }
 
@@ -30,9 +30,7 @@ export class ProductRepository {
         provider: product.provider,
         price: product.price,
         duration: product.duration,
-        photoName: product.photoName,
-        photoKey: product.photoKey,
-        photoUrl: product.photoUrl
+        cover: product.cover
       })
       .where({ id })
       .execute();

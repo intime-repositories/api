@@ -43,9 +43,6 @@ export class Client {
   address: Address;
 
   @Column({ nullable: true})
-  photoName: string;
-
-  @Column({ nullable: true})
   photoKey: string;
 
   @Column({ nullable: true})
