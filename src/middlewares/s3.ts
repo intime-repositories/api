@@ -9,9 +9,7 @@ import { ProviderService } from "../services/ProviderServices";
 export class Upload {
 
   async pictureLocation(req, res) {
-    const { location } = req.file;
-    
-    res.send(location);
+    return res.json(req.file.location)
   }
 }
 
