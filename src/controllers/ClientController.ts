@@ -20,7 +20,6 @@ export class ClientController {
       const client = request.body;
       const service = new ClientService();
       const result = await service.update(id, client);
-      console.log(client)
 
       return response.json(result);
     } catch (error) {
@@ -43,7 +42,7 @@ export class ClientController {
 
   async getOne(request: Request, response: Response) {
     try {
-      const {id} = request.params;
+      const { client: id } = request.params;
       const service = new ClientService();
       const result = await service.getOneById(id);
 

@@ -17,13 +17,14 @@ export class ProviderController {
 
   async update(request: Request, response: Response) {
     try {
+      const { id } = request.params;
       const provider = request.body;
 
       const service = new ProviderService();
 
-      await service.update(provider);
+      const result = await service.update(id, provider);
 
-      return response.status(200).end();
+      return response.json(result);
     } catch (error) {
       return response.status(400).json(error.message);
     }
