@@ -32,13 +32,4 @@ export class Product {
 
   @Column({nullable: true})
   cover: string;
-
-  @Column({ nullable: true})
-  photoName: string;
-
-  @Column({ nullable: true})
-  photoKey: string;
-
-  @Column({ nullable: true})
-  photoUrl: string;
 }

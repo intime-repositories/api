@@ -16,7 +16,7 @@ export class ProviderRepository {
     return newProvider;
   }
 
-  async update(provider: Provider) {
+  async update(id: string, provider: Provider) {
     this.repo
       .createQueryBuilder()
       .update(Provider)
@@ -29,15 +29,12 @@ export class ProviderRepository {
         birthDate: provider.birthDate,
         photo: provider.photo,
         addressId: provider.addressId,
-        photoName: provider.photoName,
-        photoKey: provider.photoKey,
-        photoUrl: provider.photoUrl
       })
-      .where(provider)
+      .where({ id })
       .execute();
   }
 
-  async save(provider: Provider){
+  async save(provider: Provider) {
     await this.repo.save(provider);
   }
 
@@ -47,7 +44,7 @@ export class ProviderRepository {
 
   async getOne(provider: Provider) {
     const result = await this.repo.findOne({
-      where: provider,
+      where: { id: provider.id },
       relations: ["address"]
     });
 

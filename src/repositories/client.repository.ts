@@ -37,9 +37,6 @@ export class ClientRepository {
         birthDate: client.birthDate,
         photo: client.photo,
         addressId: client.addressId,
-        photoName: client.photoName,
-        photoKey: client.photoKey,
-        photoUrl: client.photoUrl,
       })
       .where({ id })
       .execute();
