@@ -49,8 +49,16 @@ export class ProductRepository {
     return product;
   }
 
-  async getAll() {
-    const products = await this.repo.find({ relations: ["provider"] });
+  async getAll(user) {
+    let where;
+
+    if (user.role === "provider")
+      where = { provider: { id: user.id } }
+
+    const products = await this.repo.find({
+      relations: ["provider"],
+      where
+    });
 
     return products;
   }

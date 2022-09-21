@@ -42,9 +42,17 @@ export class SchedulingRepository {
     return item;
   }
 
-  async getAll() {
+  async getAll(user) {
+    let where;
+
+    if (user.role === 'client')
+      where = { client: { id: user.id } }
+    else
+      where = { product: { provider: { id: user.id } } }
+
     const schedulings = await this.repo.find({
       relations: ["product", "client"],
+      where
     });
 
     return schedulings

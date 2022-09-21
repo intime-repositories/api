@@ -1,5 +1,6 @@
 import { Request, response, Response } from "express";
 import { SchedulingService } from "../services/SchedulingServices";
+import jwt from "jsonwebtoken";
 
 export class SchedulingController {
   async create(request: Request, response: Response) {
@@ -60,7 +61,10 @@ export class SchedulingController {
     try {
       const service = new SchedulingService();
 
-      const result = await service.getAll();
+      const token = request.headers.authorization.split(' ')[1];
+      const user = jwt.verify(token, process.env.JWT_SECRET_KEY);
+
+      const result = await service.getAll(user);
 
       return response.json(result);
     } catch (error) {

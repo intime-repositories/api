@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { ProductService } from "../services/ProductServices";
+import jwt from "jsonwebtoken";
 
 export class ProductController {
   async create(request: Request, response: Response) {
@@ -60,7 +61,10 @@ export class ProductController {
     try {
       const service = new ProductService();
 
-      const result = await service.getAll();
+      const token = request.headers.authorization.split(' ')[1];
+      const user = jwt.verify(token, process.env.JWT_SECRET_KEY);
+
+      const result = await service.getAll(user);
 
       return response.json(result);
     } catch (error) {
