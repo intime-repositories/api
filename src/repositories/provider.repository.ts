@@ -45,14 +45,14 @@ export class ProviderRepository {
   async getOne(id: string) {
     const result = await this.repo.findOne({
       where: { id },
-      relations: ["address"]
+      relations: ["address", "category"]
     });
 
     return result;
   }
 
   async getAll() {
-    const result = await this.repo.find({ relations: ["address"] });
+    const result = await this.repo.find({ relations: ["address", "category"] });
 
     return result;
   }
@@ -60,7 +60,7 @@ export class ProviderRepository {
   async getOneByEmail(email: string) {
     const result = await this.repo.findOne({
       where: { email },
-      relations: ["address"],
+      relations: ["address", "category"],
     });
 
     return result;

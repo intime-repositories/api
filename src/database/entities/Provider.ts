@@ -6,6 +6,7 @@ import {
   JoinColumn,
 } from "typeorm";
 import { Address } from "./Address";
+import { Category } from "./Category";
 
 @Entity("provider")
 export class Provider {
@@ -40,4 +41,7 @@ export class Provider {
 
   @ManyToOne(() => Address)
   address: Address;
+  
+  @ManyToOne(() => Category)
+  category: Category;
 }
