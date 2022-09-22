@@ -42,7 +42,7 @@ export class ClientRepository {
       .execute();
   }
 
-  async getOneById(id: string) {
+  async getOne(id: string) {
     const result = await this.repo.findOne({
       where: { id },
       relations: ["address"],

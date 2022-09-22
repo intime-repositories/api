@@ -42,17 +42,17 @@ export class ProviderRepository {
     await this.repo.delete(provider);
   }
 
-  async getOne(provider: Provider) {
+  async getOne(id: string) {
     const result = await this.repo.findOne({
-      where: { id: provider.id },
-      relations: ["address"]
+      where: { id },
+      relations: ["address", "category"]
     });
 
     return result;
   }
 
   async getAll() {
-    const result = await this.repo.find({ relations: ["address"] });
+    const result = await this.repo.find({ relations: ["address", "category"] });
 
     return result;
   }
@@ -60,7 +60,7 @@ export class ProviderRepository {
   async getOneByEmail(email: string) {
     const result = await this.repo.findOne({
       where: { email },
-      relations: ["address"],
+      relations: ["address", "category"],
     });
 
     return result;

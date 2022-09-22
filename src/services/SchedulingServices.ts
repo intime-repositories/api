@@ -44,9 +44,9 @@ export class SchedulingService {
     return item;
   }
 
-  async getAll() {
+  async getAll(user) {
     const repo = new SchedulingRepository();
-    const item = await repo.getAll();
+    const item = await repo.getAll(user);
 
     return item;
   }

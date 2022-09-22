@@ -44,9 +44,9 @@ export class ProductService {
     return item;
   }
 
-  async getAll() {
+  async getAll(user) {
     const repo = new ProductRepository();
-    const item = await repo.getAll();
+    const item = await repo.getAll(user);
 
     return item;
   }

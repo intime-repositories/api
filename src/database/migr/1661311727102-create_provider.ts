@@ -52,12 +52,23 @@ export class createProvider1661311727102 implements MigrationInterface {
                   name: "addressId",
                   type: "uuid",
                   isNullable: true
+                },
+                {
+                  name: "categoryId",
+                  type: "uuid",
+                  isNullable: true
                 }
               ],
               foreignKeys: [
                 {
                   name: "fkAddress",
                   columnNames: ["addressId"],
+                  referencedTableName: "address",
+                  referencedColumnNames: ["id"],
+                },
+                {
+                  name: "fkCategory",
+                  columnNames: ["categoryId"],
                   referencedTableName: "address",
                   referencedColumnNames: ["id"],
                 }

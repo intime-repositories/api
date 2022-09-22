@@ -1,14 +1,13 @@
-import { Request, Response } from "express";
-import { ProductService } from "../services/ProductServices";
-import jwt from "jsonwebtoken";
+import { Request, response, Response } from "express";
+import { CategoryService } from "../services/Category.Services";
 
-export class ProductController {
+export class CategoryController {
   async create(request: Request, response: Response) {
     try {
-      const newProduct = request.body;
-      const service = new ProductService();
+      const newCategory = request.body;
+      const service = new CategoryService();
 
-      const result = await service.create(newProduct);
+      const result = await service.create(newCategory);
 
       return response.json(result);
     } catch (error) {
@@ -19,13 +18,13 @@ export class ProductController {
   async update(request: Request, response: Response) {
     try {
       const { id } = request.params;
-      const product = request.body;
+      const category = request.body;
 
-      const service = new ProductService();
+      const service = new CategoryService();
 
-      const result = await service.update(id, product);
+      await service.update(id, category);
 
-      return response.json(result);
+      return response.status(200).end();
     } catch (error) {
       return response.status(400).json(error.message);
     }
@@ -34,7 +33,7 @@ export class ProductController {
   async delete(request: Request, response: Response) {
     try {
       const { id } = request.params;
-      const service = new ProductService();
+      const service = new CategoryService();
 
       await service.delete(id);
 
@@ -47,7 +46,7 @@ export class ProductController {
   async getOne(request: Request, response: Response) {
     try {
       const { id } = request.params;
-      const service = new ProductService();
+      const service = new CategoryService();
 
       const result = service.getOne(id);
 
@@ -59,12 +58,9 @@ export class ProductController {
 
   async getAll(request: Request, response: Response) {
     try {
-      const service = new ProductService();
+      const service = new CategoryService();
 
-      const token = request.headers.authorization.split(' ')[1];
-      const user = jwt.verify(token, process.env.JWT_SECRET_KEY);
-
-      const result = await service.getAll(user);
+      const result = await service.getAll();
 
       return response.json(result);
     } catch (error) {
@@ -72,4 +68,3 @@ export class ProductController {
     }
   }
 }
-
