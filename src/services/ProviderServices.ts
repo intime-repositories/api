@@ -17,7 +17,7 @@ export class ProviderService {
 
   async update(id: string, provider: Provider) {
     const repo = new ProviderRepository();
-    const item = await repo.getOne(provider);
+    const item = await repo.getOne(provider.id);
 
     if (!item) {
       throw new Error("Provider does not exists!");
@@ -30,7 +30,7 @@ export class ProviderService {
 
   async delete(provider: Provider) {
     const repo = new ProviderRepository();
-    const item = await repo.getOne(provider);
+    const item = await repo.getOne(provider.id);
 
     if (!item) {
       throw new Error("Provider does not exists!");
@@ -39,9 +39,9 @@ export class ProviderService {
     await repo.delete(item);
   }
 
-  async getOne(provider: Provider) {
+  async getOne(id: string) {
     const repo = new ProviderRepository();
-    const item = await repo.getOne(provider);
+    const item = await repo.getOne(id);
 
     if (!item) {
       throw new Error("Provider does not exists!");

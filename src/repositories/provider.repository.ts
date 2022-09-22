@@ -42,9 +42,9 @@ export class ProviderRepository {
     await this.repo.delete(provider);
   }
 
-  async getOne(provider: Provider) {
+  async getOne(id: string) {
     const result = await this.repo.findOne({
-      where: { id: provider.id },
+      where: { id },
       relations: ["address"]
     });
 

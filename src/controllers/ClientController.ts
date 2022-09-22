@@ -42,9 +42,9 @@ export class ClientController {
 
   async getOne(request: Request, response: Response) {
     try {
-      const { client: id } = request.params;
+      const { id } = request.params;
       const service = new ClientService();
-      const result = await service.getOneById(id);
+      const result = await service.getOne(id);
 
       return response.json(result);
     } catch (error) {

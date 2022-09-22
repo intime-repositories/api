@@ -45,10 +45,9 @@ export class ProviderController {
 
   async getOne(request: Request, response: Response) {
     try {
-      const provider = request.body;
+      const { id } = request.params;
       const service = new ProviderService();
-
-      const result = await service.getOne(provider);
+      const result = await service.getOne(id);
 
       return response.json(result);
     } catch (error) {
