@@ -60,7 +60,7 @@ routes.delete("/product/:id", auth, product.delete);
 
 // Category routes
 routes.post("/category", auth, category.create);
-routes.get("/category", auth, category.getAll);
+routes.get("/category", category.getAll);
 routes.get("/category/:id", auth, category.getOne);
 routes.put("/category/:id", auth, category.update);
 routes.delete("/category/:id", auth, category.delete);

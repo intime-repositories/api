@@ -51,7 +51,7 @@ export class SchedulingRepository {
       where = { product: { provider: { id: user.id } } }
 
     const schedulings = await this.repo.find({
-      relations: ["product", "client"],
+      relations: ["product", "client", "product.provider", "product.provider.category"],
       where
     });
 
