@@ -16,10 +16,11 @@ export class ClientController {
 
   async update(request: Request, response: Response) {
     try {
-      const { id } = request.params;
+      const {id} = request.params;
       const client = request.body;
       const service = new ClientService();
-      const result = await service.update(id, client);
+      client.id = id;
+      const result = await service.update(client);
 
       return response.json(result);
     } catch (error) {

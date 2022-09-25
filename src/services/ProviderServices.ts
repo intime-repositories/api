@@ -15,15 +15,15 @@ export class ProviderService {
     return newProvider;
   }
 
-  async update(id: string, provider: Provider) {
-    const repo = new ProviderRepository();
-    const item = await repo.getOne(provider.id);
+  async update(provider: Provider) {
+    const providerRepo = new ProviderRepository();
+    const providerExists = await providerRepo.getOne(provider.id);
 
-    if (!item) {
+    if (!providerExists) {
       throw new Error("Provider does not exists!");
     }
 
-    await repo.update(id, provider);
+    await providerRepo.update(provider.id, provider);
 
     return { provider };
   }

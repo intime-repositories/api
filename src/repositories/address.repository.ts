@@ -4,35 +4,39 @@ import { Address } from "../database/entities/Address";
 import { Client } from "../database/entities/Client";
 
 export class AddressRepository {
-    private repo: Repository<Address>;
-    constructor() {
-        this.repo = AppDataSource.getRepository(Address);
-    }
-    
-    async create(address: Address) {
-        const newAddress = this.repo.create(address);
-        await this.repo.save(newAddress);
-        
-        return newAddress;
-    }
-    
-    async update(id: string, address: Address) {
-      this.repo
-        .createQueryBuilder()
-        .update(Address)
-        .set({
-          street: address.street,
-          number: address.number,
-          district: address.district,
-          city: address.city,
-          state: address.state,
-          complement: address.complement,
-          zipCode: address.zipCode,
-        })
-        .where({ id })
-        .execute();
-    }
-    
+  private repo: Repository<Address>;
+  constructor() {
+    this.repo = AppDataSource.getRepository(Address);
+  }
+
+  async create(address: Address) {
+    const newAddress = this.repo.create(address);
+    await this.repo.save(newAddress);
+
+    return newAddress;
+  }
+
+  async save(address: Address) {
+    await this.repo.save(address);
+  }
+
+  async update(id: string, address: Address) {
+    this.repo
+      .createQueryBuilder()
+      .update(Address)
+      .set({
+        street: address.street,
+        number: address.number,
+        district: address.district,
+        city: address.city,
+        state: address.state,
+        complement: address.complement,
+        zipCode: address.zipCode,
+      })
+      .where({ id })
+      .execute();
+  }
+
   async delete(id: string) {
     await this.repo.delete({ id });
   }
@@ -44,9 +48,8 @@ export class AddressRepository {
   }
 
   async getOne(id: string) {
-    const item = await this.repo.findOne({where: {id}});
+    const item = await this.repo.findOne({ where: { id } });
 
     return item;
   }
-
 }

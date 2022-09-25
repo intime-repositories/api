@@ -27,13 +27,15 @@ export class ClientService {
     await repo.delete(item);
   }
 
-  async update(id: string, client: Client) {
+  async update(client: Client) {
     const repo = new ClientRepository();
-    const item = await repo.getOne(id);
-    if (!item) {
+    const clientExists = await repo.getOne(client.id);
+    
+    if (!clientExists) {
       throw new Error("Client does not exists!");
     }
-    await repo.update(id, client);
+
+    await repo.update(client.id, client);
 
     return { client };
   }
