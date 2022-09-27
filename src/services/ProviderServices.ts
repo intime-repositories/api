@@ -1,4 +1,6 @@
+import { Address } from "../database/entities/Address";
 import { Provider } from "../database/entities/Provider";
+import { AddressRepository } from "../repositories/address.repository";
 import { ProviderRepository } from "../repositories/provider.repository";
 
 export class ProviderService {
@@ -15,12 +17,21 @@ export class ProviderService {
     return newProvider;
   }
 
-  async update(provider: Provider) {
+  async update(provider: Provider, address: Address) {
     const providerRepo = new ProviderRepository();
+    const addressRepo = new AddressRepository();
     const providerExists = await providerRepo.getOne(provider.id);
+    const providerAddress = await addressRepo.getOne(provider.addressId);
 
     if (!providerExists) {
       throw new Error("Provider does not exists!");
+    }
+
+    if(providerAddress){
+      await addressRepo.update(providerAddress.id, address)
+    } else {
+      const newAddress = await addressRepo.create(address);
+      provider.addressId = newAddress.id;
     }
 
     await providerRepo.update(provider.id, provider);

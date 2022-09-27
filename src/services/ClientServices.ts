@@ -1,4 +1,6 @@
+import { Address } from "../database/entities/Address";
 import { Client } from "../database/entities/Client";
+import { AddressRepository } from "../repositories/address.repository";
 import { ClientRepository } from "../repositories/client.repository";
 
 export class ClientService {
@@ -27,15 +29,24 @@ export class ClientService {
     await repo.delete(item);
   }
 
-  async update(client: Client) {
-    const repo = new ClientRepository();
-    const clientExists = await repo.getOne(client.id);
+  async update(client: Client, address: Address) {
+    const clientRepo = new ClientRepository();
+    const addressRepo = new AddressRepository();
+    const clientExists = await clientRepo.getOne(client.id);
+    const clientAddress = await addressRepo.getOne(client.addressId)
     
     if (!clientExists) {
       throw new Error("Client does not exists!");
     }
 
-    await repo.update(client.id, client);
+    if(clientAddress){
+      await addressRepo.update(clientAddress.id, address)
+    } else {
+      const newAddress = await addressRepo.create(address);
+      client.addressId = newAddress.id;
+    }
+
+    await clientRepo.update(client.id, client);
 
     return { client };
   }
