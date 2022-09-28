@@ -10,9 +10,7 @@ export class ProviderRepository {
 
   async create(provider: Provider) {
     const newProvider = this.repo.create(provider);
-
     await this.repo.save(newProvider);
-
     return newProvider;
   }
 
@@ -27,8 +25,7 @@ export class ProviderRepository {
         phone: provider.phone,
         cpf: provider.cpf,
         birthDate: provider.birthDate,
-        photo: provider.photo,
-        addressId: provider.addressId,
+        photo: provider.photo
       })
       .where({ id })
       .execute();

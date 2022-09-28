@@ -19,10 +19,9 @@ export class ProviderController {
     try {
       const { id } = request.params;
       const provider = request.body;
-      const address = provider.address;
       const service = new ProviderService();
       provider.id = id;
-      const result = await service.update(provider, address);
+      const result = await service.update(provider);
 
       return response.json(result);
     } catch (error) {

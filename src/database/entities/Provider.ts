@@ -36,9 +36,6 @@ export class Provider {
   @Column({ nullable: true })
   photo: string;
 
-  @Column({ nullable: true })
-  addressId: string;
-
   @ManyToOne(() => Address)
   address: Address;
   

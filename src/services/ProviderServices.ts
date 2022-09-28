@@ -7,32 +7,24 @@ export class ProviderService {
   async create(provider: Provider): Promise<Provider | Error> {
     const bcrypt = require("bcrypt")
     const repo = new ProviderRepository();
+    const addressRepo = new AddressRepository();
 
     provider.password = bcrypt.hashSync(provider.password, 8);
-    
-    const newProvider = await repo.create(provider);
 
-    
+    const newAddress = await addressRepo.create(provider.address);
+    provider.address.id = newAddress.id;
+
+    const newProvider = await repo.create(provider);
 
     return newProvider;
   }
 
-  async update(provider: Provider, address: Address) {
+  async update(provider: Provider) {
     const providerRepo = new ProviderRepository();
     const addressRepo = new AddressRepository();
-    const providerExists = await providerRepo.getOne(provider.id);
-    const providerAddress = await addressRepo.getOne(provider.addressId);
 
-    if (!providerExists) {
-      throw new Error("Provider does not exists!");
-    }
-
-    if(providerAddress){
-      await addressRepo.update(providerAddress.id, address)
-    } else {
-      const newAddress = await addressRepo.create(address);
-      provider.addressId = newAddress.id;
-    }
+    if (provider?.address)
+      await addressRepo.update(provider.address.id, provider.address)
 
     await providerRepo.update(provider.id, provider);
 
@@ -67,8 +59,8 @@ export class ProviderService {
 
     return item;
   }
-  
-  async getOneByEmail(email: string){
+
+  async getOneByEmail(email: string) {
     const repo = new ProviderRepository();
     const item = await repo.getOneByEmail(email);
 
