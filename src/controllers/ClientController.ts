@@ -1,5 +1,5 @@
-import { ClientService } from "../services/ClientServices";
 import { Request, Response } from "express";
+import { ClientService } from "../services/ClientServices";
 
 export class ClientController {
   async create(request: Request, response: Response) {

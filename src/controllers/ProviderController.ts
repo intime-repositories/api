@@ -1,4 +1,4 @@
-import { Request, response, Response } from "express";
+import { Request, Response } from "express";
 import { ProviderService } from "../services/ProviderServices";
 
 export class ProviderController {
@@ -44,7 +44,7 @@ export class ProviderController {
 
   async getOne(request: Request, response: Response) {
     try {
-      const {id} = request.params;
+      const { id } = request.params;
       const service = new ProviderService();
       const result = await service.getOne(id);
 

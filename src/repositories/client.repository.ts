@@ -28,15 +28,7 @@ export class ClientRepository {
     this.repo
       .createQueryBuilder()
       .update(Client)
-      .set({
-        email: client.email,
-        password: client.password,
-        fullname: client.fullname,
-        phone: client.phone,
-        cpf: client.cpf,
-        birthDate: client.birthDate,
-        photo: client.photo,
-      })
+      .set(client)
       .where({ id })
       .execute();
   }
