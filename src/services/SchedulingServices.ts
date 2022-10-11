@@ -22,6 +22,18 @@ export class SchedulingService {
     return { id, scheduling };
   }
 
+  async checkScheduling(scheudulingId, startTime, endTime) {
+    const repo = new SchedulingRepository();
+    const item = await repo.getOne(scheudulingId);
+
+    if (!item) {
+      throw new Error("Scheduling does not exists!");
+    }
+
+    await repo.checkScheduling(scheudulingId, startTime, endTime);
+
+  }
+
   async delete(id: string) {
     const repo = new SchedulingRepository();
     const item = await repo.getOne(id);

@@ -71,4 +71,18 @@ export class SchedulingController {
       return response.status(400).json(error.message);
     }
   }
+
+  async checkScheduling(request: Request, response: Response) {
+    try {
+      const { scheudulingId, startTime, endTime } = request.body;
+
+      const service = new SchedulingService();
+
+      await service.checkScheduling(scheudulingId, startTime, endTime);
+
+      return response.status(200).end();
+    } catch (error) {
+      return response.status(400).json(error.message);
+    }
+  }
 }

@@ -29,6 +29,13 @@ export class SchedulingRepository {
       .execute();
   }
 
+  async checkScheduling(scheudulingId, startTime, endTime) {
+    this.repo
+      .createQueryBuilder()
+      .select("scheduling")
+      .from(Scheduling, "scheduling")
+  }
+
   async delete(id: string) {
     await this.repo.delete({ id });
   }
