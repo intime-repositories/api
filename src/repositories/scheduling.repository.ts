@@ -29,11 +29,12 @@ export class SchedulingRepository {
       .execute();
   }
 
-  async checkScheduling(scheudulingId, startTime, endTime) {
-    this.repo
-      .createQueryBuilder()
-      .select("scheduling")
-      .from(Scheduling, "scheduling")
+  async getConflictingSchedulings(providerId: string, startDate, endDate) {
+    return await this.repo
+      .createQueryBuilder("scheduling")
+      .innerJoinAndSelect("provider", "p", "p.id = :providerId", { providerId: providerId })
+      .where("(:startDate <= scheduling.endDate and :startDate >= scheduling.startDate) or (:startDate <= scheduling.startDate and :endDate > scheduling.startDate)", { startDate, endDate })
+      .getMany()
   }
 
   async delete(id: string) {

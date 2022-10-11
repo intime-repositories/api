@@ -50,6 +50,7 @@ routes.get("/scheduling", auth, scheduling.getAll);
 routes.get("/scheduling/:id", auth, scheduling.getOne);
 routes.put("/scheduling/:id", auth, scheduling.update);
 routes.delete("/scheduling/:id", auth, scheduling.delete);
+routes.post("/scheduling/check", scheduling.checkScheduling);
 
 // Products routes
 routes.post("/product", auth, product.create);
