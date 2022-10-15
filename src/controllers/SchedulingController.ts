@@ -71,4 +71,18 @@ export class SchedulingController {
       return response.status(400).json(error.message);
     }
   }
+
+  async checkScheduling(request: Request, response: Response) {
+    try {
+      const { providerId, startDate, endDate } = request.body;
+
+      const service = new SchedulingService();
+
+      const isAvailable = await service.checkScheduling(providerId, startDate, endDate);
+
+      return response.json({ isAvailable: isAvailable })
+    } catch (error) {
+      return response.status(400).json(error.message);
+    }
+  }
 }

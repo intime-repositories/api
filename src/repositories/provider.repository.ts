@@ -10,9 +10,7 @@ export class ProviderRepository {
 
   async create(provider: Provider) {
     const newProvider = this.repo.create(provider);
-
     await this.repo.save(newProvider);
-
     return newProvider;
   }
 
@@ -20,16 +18,7 @@ export class ProviderRepository {
     this.repo
       .createQueryBuilder()
       .update(Provider)
-      .set({
-        email: provider.email,
-        password: provider.password,
-        fullname: provider.fullname,
-        phone: provider.phone,
-        cpf: provider.cpf,
-        birthDate: provider.birthDate,
-        photo: provider.photo,
-        addressId: provider.addressId,
-      })
+      .set(provider)
       .where({ id })
       .execute();
   }

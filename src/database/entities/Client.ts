@@ -35,11 +35,7 @@ export class Client {
   @Column({ nullable: true })
   photo: string;
 
-  @Column({ nullable: true })
-  addressId: string;
-
   @ManyToOne(() => Address)
-  @JoinColumn({ name: "addressId" })
   address: Address;
 
   @Column({ nullable: true})

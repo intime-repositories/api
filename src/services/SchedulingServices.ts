@@ -22,6 +22,17 @@ export class SchedulingService {
     return { id, scheduling };
   }
 
+  async checkScheduling(providerId, startDate, endDate) {
+    const repo = new SchedulingRepository();
+
+    const schedulings = await repo.getConflictingSchedulings(providerId, startDate, endDate);
+
+    if (schedulings?.length === 0)
+      return true
+
+    return false
+  }
+
   async delete(id: string) {
     const repo = new SchedulingRepository();
     const item = await repo.getOne(id);

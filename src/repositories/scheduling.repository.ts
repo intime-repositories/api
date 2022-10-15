@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { MoreThanOrEqual, Repository } from "typeorm";
 import AppDataSource from "../database/dataSource";
 import { Scheduling } from "../database/entities/Scheduling";
 
@@ -29,6 +29,14 @@ export class SchedulingRepository {
       .execute();
   }
 
+  async getConflictingSchedulings(providerId: string, startDate, endDate) {
+    return await this.repo
+      .createQueryBuilder("scheduling")
+      .innerJoinAndSelect("provider", "p", "p.id = :providerId", { providerId: providerId })
+      .where("(:startDate <= scheduling.endDate and :startDate >= scheduling.startDate) or (:startDate <= scheduling.startDate and :endDate > scheduling.startDate)", { startDate, endDate })
+      .getMany()
+  }
+
   async delete(id: string) {
     await this.repo.delete({ id });
   }
@@ -44,6 +52,7 @@ export class SchedulingRepository {
 
   async getAll(user) {
     let where;
+    const now = new Date();
 
     if (user.role === 'client')
       where = { client: { id: user.id } }
@@ -52,7 +61,7 @@ export class SchedulingRepository {
 
     const schedulings = await this.repo.find({
       relations: ["product", "client", "product.provider", "product.provider.category"],
-      where
+      where: { ...where, endDate: MoreThanOrEqual(now) }
     });
 
     return schedulings

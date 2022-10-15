@@ -33,7 +33,7 @@ routes.delete("/address/:id", auth, address.delete);
 // Client routes
 routes.post("/client/signup", client.create);
 routes.get("/client", auth, client.getAll);
-routes.get("/client/:client", auth, client.getOne);
+routes.get("/client/:id", auth, client.getOne);
 routes.put("/client/:id", auth, client.update);
 routes.delete("/client/:id", auth, client.delete);
 
@@ -50,6 +50,7 @@ routes.get("/scheduling", auth, scheduling.getAll);
 routes.get("/scheduling/:id", auth, scheduling.getOne);
 routes.put("/scheduling/:id", auth, scheduling.update);
 routes.delete("/scheduling/:id", auth, scheduling.delete);
+routes.post("/scheduling/check", scheduling.checkScheduling);
 
 // Products routes
 routes.post("/product", auth, product.create);
