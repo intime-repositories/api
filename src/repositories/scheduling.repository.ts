@@ -60,7 +60,7 @@ export class SchedulingRepository {
       where = { product: { provider: { id: user.id } } }
 
     const schedulings = await this.repo.find({
-      relations: ["product", "client", "product.provider", "product.provider.category"],
+      relations: ["product", "client", "product.provider", "product.provider.category", "product.provider.address"],
       where: { ...where, endDate: MoreThanOrEqual(now) }
     });
 
