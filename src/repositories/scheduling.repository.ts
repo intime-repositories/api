@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { MoreThanOrEqual, Repository } from "typeorm";
 import AppDataSource from "../database/dataSource";
 import { Scheduling } from "../database/entities/Scheduling";
 
@@ -52,6 +52,7 @@ export class SchedulingRepository {
 
   async getAll(user) {
     let where;
+    const now = new Date();
 
     if (user.role === 'client')
       where = { client: { id: user.id } }
@@ -60,7 +61,7 @@ export class SchedulingRepository {
 
     const schedulings = await this.repo.find({
       relations: ["product", "client", "product.provider", "product.provider.category"],
-      where
+      where: { ...where, endDate: MoreThanOrEqual(now) }
     });
 
     return schedulings
