@@ -7,7 +7,8 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "dev": "ts-node-dev --transpile-only src/server.ts",
-    "typeorm": "ts-node-dev node_modules/typeorm/cli.js"
+    "typeorm": "ts-node-dev node_modules/typeorm/cli.js",
+    "migration": "yarn run typeorm -- migration:run -d dist/database/dataSource"
   },
   "dependencies": {
     "@aws-sdk/abort-controller": "^3.162.0",
