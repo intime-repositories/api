@@ -56,7 +56,7 @@ export class ProductRepository {
       where = { provider: { id: user.id } }
 
     const products = await this.repo.find({
-      relations: ["provider", "provider.category"],
+      relations: ["provider", "provider.category", "provider.address"],
       where
     });
 
